@@ -1,4 +1,4 @@
-package com.example.sns.entity.dto;
+package com.example.sns.entity.dto.comment;
 
 import com.example.sns.entity.Comment;
 import com.fasterxml.jackson.annotation.JsonFormat;

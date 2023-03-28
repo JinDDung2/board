@@ -1,7 +1,7 @@
 package com.example.sns.controller;
 
 import com.example.sns.entity.Comment;
-import com.example.sns.entity.dto.*;
+import com.example.sns.entity.dto.comment.*;
 import com.example.sns.exception.SpringBootAppException;
 import com.example.sns.fixture.CommentFixture;
 import com.example.sns.service.CommentService;

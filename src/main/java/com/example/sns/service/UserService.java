@@ -3,6 +3,7 @@ package com.example.sns.service;
 import com.example.sns.entity.Alarm;
 import com.example.sns.entity.User;
 import com.example.sns.entity.dto.*;
+import com.example.sns.entity.dto.user.*;
 import com.example.sns.exception.SpringBootAppException;
 import com.example.sns.jwt.JwtTokenUtils;
 import com.example.sns.repository.AlarmRepository;

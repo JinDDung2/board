@@ -4,7 +4,7 @@ import com.example.sns.entity.Alarm;
 import com.example.sns.entity.Comment;
 import com.example.sns.entity.Post;
 import com.example.sns.entity.User;
-import com.example.sns.entity.dto.*;
+import com.example.sns.entity.dto.comment.*;
 import com.example.sns.exception.SpringBootAppException;
 import com.example.sns.repository.AlarmRepository;
 import com.example.sns.repository.CommentRepository;

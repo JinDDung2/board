@@ -1,4 +1,4 @@
-package com.example.sns.entity.dto;
+package com.example.sns.entity.dto.post;
 
 import com.example.sns.entity.Post;
 import com.example.sns.entity.User;

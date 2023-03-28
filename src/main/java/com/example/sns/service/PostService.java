@@ -2,7 +2,7 @@ package com.example.sns.service;
 
 import com.example.sns.entity.Post;
 import com.example.sns.entity.User;
-import com.example.sns.entity.dto.*;
+import com.example.sns.entity.dto.post.*;
 import com.example.sns.exception.SpringBootAppException;
 import com.example.sns.repository.CommentRepository;
 import com.example.sns.repository.PostLikeRepository;

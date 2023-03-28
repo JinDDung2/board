@@ -1,25 +1,25 @@
-package com.example.sns.entity.dto;
+package com.example.sns.entity.dto.post;
 
 import com.example.sns.entity.Post;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class PostDeleteResponseDto {
+public class PostCreateResponseDto {
 
     private Integer postId;
     private String message;
 
     @Builder
-    public PostDeleteResponseDto(Integer postId, String message) {
+    public PostCreateResponseDto(Integer postId, String message) {
         this.postId = postId;
         this.message = message;
     }
 
-    public static PostDeleteResponseDto from(Post post) {
-        return PostDeleteResponseDto.builder()
+    public static PostCreateResponseDto from(Post post) {
+        return PostCreateResponseDto.builder()
                 .postId(post.getId())
-                .message("포스트 삭제 완료")
+                .message("포스트 등록 완료")
                 .build();
     }
 }

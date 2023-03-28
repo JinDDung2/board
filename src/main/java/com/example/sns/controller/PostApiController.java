@@ -1,6 +1,6 @@
 package com.example.sns.controller;
 
-import com.example.sns.entity.dto.*;
+import com.example.sns.entity.dto.post.*;
 import com.example.sns.service.PostService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

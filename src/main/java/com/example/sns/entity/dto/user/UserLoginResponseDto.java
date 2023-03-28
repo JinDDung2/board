@@ -1,4 +1,4 @@
-package com.example.sns.entity.dto;
+package com.example.sns.entity.dto.user;
 
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
 package com.example.sns.controller;
 
-import com.example.sns.entity.dto.*;
+import com.example.sns.entity.dto.comment.*;
 import com.example.sns.service.CommentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -70,7 +70,7 @@ public class CommentApiController {
     })
     @DeleteMapping("{postId}/comments/{commentId}")
     public RsData<CommentDeleteResponseDto> deleteById(@PathVariable Integer postId, @PathVariable Integer commentId,
-                                                   Authentication authentication) {
+                                                       Authentication authentication) {
         CommentDeleteResponseDto response = commentService.deleteById(postId, commentId, authentication.getName());
         return RsData.success(response);
     }
