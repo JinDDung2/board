@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.Optional;
 
@@ -34,11 +35,12 @@ class PostServiceTest {
     UserRepository userRepository = Mockito.mock(UserRepository.class);
     PostLikeRepository postLikeRepository = Mockito.mock(PostLikeRepository.class);
     CommentRepository commentRepository = Mockito.mock(CommentRepository.class);
+    ApplicationEventPublisher publisher = Mockito.mock(ApplicationEventPublisher.class);
 
     PostService postService;
     @BeforeEach
     void setUp() {
-        postService = new PostService(postRepository, userRepository, postLikeRepository, commentRepository);
+        postService = new PostService(postRepository, userRepository, postLikeRepository, commentRepository, publisher);
     }
 
     // 글쓴 유저

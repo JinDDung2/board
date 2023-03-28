@@ -9,13 +9,13 @@ import com.example.sns.exception.SpringBootAppException;
 import com.example.sns.fixture.CommentFixture;
 import com.example.sns.fixture.PostInfoFixture;
 import com.example.sns.fixture.UserInfoFixture;
-import com.example.sns.repository.AlarmRepository;
 import com.example.sns.repository.CommentRepository;
 import com.example.sns.repository.PostRepository;
 import com.example.sns.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.Optional;
 
@@ -29,13 +29,13 @@ class CommentServiceTest {
     CommentRepository commentRepository = Mockito.mock(CommentRepository.class);
     UserRepository userRepository = Mockito.mock(UserRepository.class);
     PostRepository postRepository = Mockito.mock(PostRepository.class);
-    AlarmRepository alarmRepository = Mockito.mock(AlarmRepository.class);
+    ApplicationEventPublisher publisher = Mockito.mock(ApplicationEventPublisher.class);
 
     CommentService commentService;
 
     @BeforeEach
     void setUp() {
-        commentService = new CommentService(commentRepository, postRepository, userRepository, alarmRepository);
+        commentService = new CommentService(commentRepository, postRepository, userRepository, publisher);
     }
 
     User givenUser1 = UserInfoFixture.get("user", "password1");
