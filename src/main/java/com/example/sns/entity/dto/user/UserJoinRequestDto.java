@@ -1,6 +1,5 @@
 package com.example.sns.entity.dto.user;
 
-import com.example.sns.entity.Role;
 import com.example.sns.entity.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +18,6 @@ public class UserJoinRequestDto {
     private String userName;
     @NotNull
     private String password;
-    private Role role;
 
     @Builder
     public UserJoinRequestDto(String userName, String password) {
