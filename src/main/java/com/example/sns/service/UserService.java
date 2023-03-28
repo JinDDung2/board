@@ -91,7 +91,7 @@ public class UserService {
             throw new SpringBootAppException(USERNAME_NOT_FOUND, userName + " 아이디가 존재하지 않습니다.");
         });
 
-        Page<Alarm> pages = alarmRepository.findAllByUserId(findUser.getId(), pageable);
+        Page<Alarm> pages = alarmRepository.findByTargetUser(findUser, pageable);
         return pages.map(AlarmReadResponse::from);
     }
 }

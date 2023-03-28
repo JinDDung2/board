@@ -18,6 +18,7 @@ public class PostLike extends BaseTime{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "like_id")
     private Integer id;
+    private boolean isLike;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
@@ -31,5 +32,23 @@ public class PostLike extends BaseTime{
     public PostLike(Post post, User user) {
         this.post = post;
         this.user = user;
+    }
+
+    public static PostLike from(Post post, User user) {
+        return PostLike.builder()
+                .post(post)
+                .user(user)
+                .build();
+    }
+
+    public boolean likes() {
+        if (isLike) post.decreaseLike();
+        else post.increaseLike();
+        clickLike();
+        return isLike;
+    }
+
+    private void clickLike() {
+        isLike = !isLike;
     }
 }

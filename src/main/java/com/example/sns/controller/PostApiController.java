@@ -92,5 +92,27 @@ public class PostApiController {
         return RsData.success(responseDto);
     }
 
+    @ApiOperation(value = "좋아요 추가")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "좋아요를 눌렀습니다."),
+            @ApiResponse(code = 404, message = "해당 포스트가 없습니다."),
+            @ApiResponse(code = 404, message = "UserName을 찾을 수 없습니다."),
+    })
+    @PostMapping("/{postId}/likes")
+    public RsData<String> likes(@PathVariable Integer postId, Authentication authentication) {
+        boolean result = postService.isLike(postId, authentication.getName());
+        return RsData.success(result ? "좋아요를 눌렀습니다." : "좋아요를 취소했습니다.");
+    }
+
+    @ApiOperation(value = "좋아요 개수 조회")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "좋아요 개수"),
+            @ApiResponse(code = 404, message = "해당 포스트가 없습니다.")
+    })
+    @GetMapping("/{postId}/likes")
+    public RsData<Integer> getLikes(@PathVariable Integer postId) {
+        return RsData.success(postService.findById(postId).getPostLikes());
+    }
+
 
 }

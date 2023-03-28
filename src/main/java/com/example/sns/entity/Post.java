@@ -52,4 +52,16 @@ public class Post extends BaseTime{
         this.title = title;
         this.body = body;
     }
+
+    public synchronized void increaseLike() {
+        likeCounts++;
+    }
+
+    public synchronized void decreaseLike() {
+        if (likeCounts > 0) likeCounts--;
+    }
+
+    public boolean isEqualUser(User user) {
+        return this.user.getId().equals(user.getId());
+    }
 }

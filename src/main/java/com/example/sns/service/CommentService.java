@@ -1,22 +1,22 @@
 package com.example.sns.service;
 
-import com.example.sns.entity.Alarm;
 import com.example.sns.entity.Comment;
 import com.example.sns.entity.Post;
 import com.example.sns.entity.User;
 import com.example.sns.entity.dto.comment.*;
+import com.example.sns.event.AlarmEvent;
 import com.example.sns.exception.SpringBootAppException;
-import com.example.sns.repository.AlarmRepository;
 import com.example.sns.repository.CommentRepository;
 import com.example.sns.repository.PostRepository;
 import com.example.sns.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.example.sns.entity.AlarmType.NEW_COMMENT_ON_POST;
+import static com.example.sns.entity.Alarm.AlarmType.NEW_COMMENT_ON_POST;
 import static com.example.sns.entity.Role.ADMIN;
 import static com.example.sns.exception.ErrorCode.*;
 
@@ -28,7 +28,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final AlarmRepository alarmRepository;
+    private final ApplicationEventPublisher publisher;
 
     /**
      * 비지니스 로직 CRUD
@@ -46,7 +46,7 @@ public class CommentService {
 
         // 내 게시물에 내 댓글을 알람 저장 x
         if (!post.getUser().getUserName().equals(userName)) {
-            alarmRepository.save(new Alarm(user.getId(), postId, NEW_COMMENT_ON_POST, post.getUser()));
+            publisher.publishEvent(AlarmEvent.from(NEW_COMMENT_ON_POST, post.getUser(), user));
         }
         return CommentCreateResponseDto.from(comment);
     }
@@ -88,9 +88,6 @@ public class CommentService {
         }
 
         commentRepository.deleteById(commentId);
-        alarmRepository.findByUserAndTargetId(user, postId).ifPresent(alarm -> {
-            alarmRepository.deleteById(alarm.getId());
-        });
         return CommentDeleteResponseDto.from(comment);
     }
 
