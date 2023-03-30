@@ -1,5 +1,6 @@
 package com.example.sns.controller;
 
+import com.example.sns.entity.Role;
 import com.example.sns.entity.dto.user.UserJoinRequestDto;
 import com.example.sns.entity.dto.user.UserJoinResponseDto;
 import com.example.sns.entity.dto.user.UserLoginRequestDto;
@@ -46,7 +47,7 @@ class UserApiControllerTest {
         // given
         UserJoinRequestDto requestDto = new UserJoinRequestDto("testName", "testPwd");
         given(userService.join(any(UserJoinRequestDto.class)))
-                .willReturn(new UserJoinResponseDto(100, requestDto.getUserName()));
+                .willReturn(new UserJoinResponseDto(100, requestDto.getUserName(), Role.USER));
         // when
         // then
         mockMvc.perform(post("/api/v1/users/join")
