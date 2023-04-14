@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,7 +27,7 @@ public class PostApiController {
             @ApiResponse(code = 401, message = "사용자 권한이 없습니다.")
     })
     @PostMapping("")
-    public RsData<PostCreateResponseDto> createPost(@RequestBody PostCreateRequestDto requestDto, Authentication authentication) {
+    public RsData<PostCreateResponseDto> createPost(@RequestBody @Validated PostCreateRequestDto requestDto, Authentication authentication) {
         PostCreateResponseDto responseDto = postService.createPost(requestDto, authentication.getName());
         return RsData.success(responseDto);
     }
@@ -73,7 +74,7 @@ public class PostApiController {
     })
     @PutMapping("/{postId}")
     public RsData<PostUpdateResponseDto> update(@PathVariable Integer postId,
-                                                @RequestBody PostUpdateRequestDto requestDto,
+                                                @RequestBody @Validated PostUpdateRequestDto requestDto,
                                                 Authentication authentication) {
         PostUpdateResponseDto responseDto = postService.update(requestDto, postId, authentication.getName());
         return RsData.success(responseDto);

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,7 +29,7 @@ public class CommentApiController {
     })
     @PostMapping("/{postId}/comments")
     public RsData<CommentCreateResponseDto> createComment(@PathVariable Integer postId,
-                                                          @RequestBody CommentCreateRequestDto requestDto,
+                                                          @RequestBody @Validated CommentCreateRequestDto requestDto,
                                                           Authentication authentication) {
         CommentCreateResponseDto response = commentService.createComment(requestDto,
                 postId, authentication.getName());
@@ -56,7 +57,7 @@ public class CommentApiController {
     })
     @PutMapping("{postId}/comments/{commentId}")
     public RsData<CommentUpdateResponseDto> update(@PathVariable Integer postId, @PathVariable Integer commentId,
-                                                   @RequestBody CommentUpdateRequestDto requestDto,
+                                                   @RequestBody @Validated CommentUpdateRequestDto requestDto,
                                                    Authentication authentication) {
         CommentUpdateResponseDto response = commentService.update(requestDto, postId, commentId, authentication.getName());
         return RsData.success(response);

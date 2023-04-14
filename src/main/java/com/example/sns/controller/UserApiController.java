@@ -1,6 +1,6 @@
 package com.example.sns.controller;
 
-import com.example.sns.entity.dto.*;
+import com.example.sns.entity.dto.AlarmReadResponse;
 import com.example.sns.entity.dto.user.*;
 import com.example.sns.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +28,7 @@ public class UserApiController {
             @ApiResponse(code = 409, message = "유저 이름이 이미 존재")
     })
     @PostMapping("/users/join")
-    public RsData<UserJoinResponseDto> join(@RequestBody UserJoinRequestDto requestDto) {
+    public RsData<UserJoinResponseDto> join(@RequestBody @Validated UserJoinRequestDto requestDto) {
         UserJoinResponseDto responseDto = userService.join(requestDto);
         return RsData.success(responseDto);
     }
@@ -39,7 +40,7 @@ public class UserApiController {
     })
     @ApiOperation(value = "로그인")
     @PostMapping("/users/login")
-    public RsData<UserLoginResponseDto> login(@RequestBody UserLoginRequestDto requestDto) {
+    public RsData<UserLoginResponseDto> login(@RequestBody @Validated UserLoginRequestDto requestDto) {
         UserLoginResponseDto responseDto = userService.login(requestDto);
         return RsData.success(responseDto);
     }
