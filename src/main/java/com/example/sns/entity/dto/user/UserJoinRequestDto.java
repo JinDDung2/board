@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import static com.example.sns.entity.Role.USER;
 
@@ -15,8 +16,10 @@ import static com.example.sns.entity.Role.USER;
 public class UserJoinRequestDto {
 
     @NotBlank
+    @Pattern(regexp="[a-zA-Z1-9]{4,12}", message = "아이디는 영어와 숫자로 포함해서 4~12자리 이내로 입력해주세요.")
     private String userName;
     @NotBlank
+    @Pattern(regexp="[a-zA-Z1-9]{6,12}", message = "비밀번호는 영어와 숫자로 포함해서 6~12자리 이내로 입력해주세요.")
     private String password;
 
     @Builder

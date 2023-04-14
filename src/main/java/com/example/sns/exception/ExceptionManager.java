@@ -4,10 +4,13 @@ package com.example.sns.exception;
 import com.example.sns.controller.RsData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 @RestControllerAdvice
 public class ExceptionManager {
@@ -23,6 +26,16 @@ public class ExceptionManager {
         ErrorResult errorResult = new ErrorResult(ErrorCode.DATABASE_ERROR, e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(RsData.error(new ErrorResult(errorResult.getErrorCode(), errorResult.getMessage())));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> validationExceptionHandler(MethodArgumentNotValidException e) {
+        String message = Optional.ofNullable(e.getFieldError())
+                .map(FieldError::getDefaultMessage)
+                .orElse("");
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(RsData.error(message));
     }
 
 }
