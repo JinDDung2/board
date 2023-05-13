@@ -39,13 +39,17 @@ public class Post extends BaseTime{
 
     private Integer likeCounts;
 
+    @Version
+    private Long version;
+
     @Builder
-    public Post(Integer id, String title, String body, User user, Integer likeCounts) {
+    public Post(Integer id, String title, String body, User user, Integer likeCounts, Long version) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.user = user;
         this.likeCounts = likeCounts;
+        this.version = version;
     }
 
     public void update(String title, String body) {
