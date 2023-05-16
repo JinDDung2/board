@@ -8,6 +8,7 @@ url: ~~(http://ec2-43-200-70-107.ap-northeast-2.compute.amazonaws.com:8080/swagg
 
 ---
 ### 체크리스트
+
 ✅ 회원가입 <br>
 ✅ Swagger <br>
 ✅ AWS EC2에 Docker 배포 <br>
@@ -22,8 +23,10 @@ url: ~~(http://ec2-43-200-70-107.ap-northeast-2.compute.amazonaws.com:8080/swagg
 ✅ 마이피드 <br>
 ✅ 알림 <br>
 ☑️ 화면 UI 개발(차후 개발 예정) <br>
+
 ---
 ### 접근 방법 및 고민했던 부분
+
 - [문제 해결 과정](https://github.com/JinDDung2/board/wiki/%EA%B3%A0%EB%AF%BC%EA%B3%BC-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0-%EA%B3%BC%EC%A0%95)
 - hibernate 원서와 jpa에서 사용하는 애노테이션을 보며 디폴트 값과 사용방법을 공부하며 적용했습니다.
 - 엔티티 값을 setter로 변경하는 것을 다음과 같은 이유로 지양했습니다.
@@ -38,11 +41,15 @@ url: ~~(http://ec2-43-200-70-107.ap-northeast-2.compute.amazonaws.com:8080/swagg
     - 그로 인해 생성자, static 메서드 그리고 필드 값은 로깅이 불가능하다.
 - toEntity() 메서드가 다른 도미인에 의존해도 되는 것인가?
   - toEntity 메서드의 역할은 dto 객체를 Entity로 만드는 역할인데, CommentCreateRequestDto에서 toEntity(User user, Post post) 메서드를 두는 것은 유저 엔티티와 포스트 엔티티에 의존하게 된다.
+
 ---
+
 ### 아쉬운 점
 - 테스트에 대한 기본지식 부족과 mock에 대한 지식 부족으로 인해 기능 테스트시간이 기능구현시간보다 적어도 3배이상 걸렸습니다.
 - Thymeleaf 를 복습할 겸 화면 UI를 만들고자 했지만, 못만들어서 아쉽습니다.
+
 ---
+
 ### 관리자 아이디
 ```json
 {
@@ -50,13 +57,16 @@ url: ~~(http://ec2-43-200-70-107.ap-northeast-2.compute.amazonaws.com:8080/swagg
   "password":"jin"
 } 
 ```
-<br>
-<br>
+
+---
 
 ## 📔  Architecture(아키텍처) - Layered Architecture 구조
 <img src="assets/img/architecture.png">
 
+---
+
 ## DB설계
+
 
 ### users
 <img src="assets/img/userDB.png">
@@ -73,11 +83,12 @@ url: ~~(http://ec2-43-200-70-107.ap-northeast-2.compute.amazonaws.com:8080/swagg
 ### alarms
 <img src="assets/img/alarmDB.png">
 
+---
+
 ## ERD
 <img src="assets/img/erd.png">
 
-
-
+---
 
 
 
