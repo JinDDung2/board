@@ -41,7 +41,9 @@ public class CommentService {
         // 유저아이디 일치
         User user = findUser(userName);
 
-        Comment comment = commentCreateRequestDto.toEntity(user, post);
+        Comment comment = commentCreateRequestDto.toEntity();
+        comment.addPost(post);
+        comment.addCommentUser(user);
         commentRepository.save(comment);
 
         // 내 게시물에 내 댓글을 알람 저장 x

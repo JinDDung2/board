@@ -51,7 +51,12 @@ public class Post extends BaseTime{
         this.likeCounts = likeCounts;
         this.version = version;
     }
+    // 연관관계 메서드
+    public void addUser(User user) {
+        this.user = user;
+    }
 
+    // 비지니스 로직
     public void update(String title, String body) {
         this.title = title;
         this.body = body;

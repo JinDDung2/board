@@ -38,6 +38,16 @@ public class Comment extends BaseTime{
         this.commentUser = commentUser;
     }
 
+    // 연관관계 메서드
+    public void addPost(Post post) {
+        this.post = post;
+    }
+
+    // 비지니스 로직
+    public void addCommentUser(User user) {
+        this.commentUser = commentUser;
+    }
+
     public void update(String comment) {
         this.comment = comment;
     }

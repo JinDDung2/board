@@ -1,7 +1,6 @@
 package com.example.sns.entity.dto.post;
 
 import com.example.sns.entity.Post;
-import com.example.sns.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +22,10 @@ public class PostCreateRequestDto {
         this.body = body;
     }
 
-    public Post toEntity(User user) {
+    public Post toEntity() {
         return Post.builder()
                 .title(this.title)
                 .body(this.body)
-                .user(user)
                 .likeCounts(0)
                 .build();
     }

@@ -37,7 +37,8 @@ public class PostService {
      */
     public PostCreateResponseDto createPost(PostCreateRequestDto requestDto, String userName) {
         User user = findUser(userName);
-        Post post = requestDto.toEntity(user);
+        Post post = requestDto.toEntity();
+        post.addUser(user);
 
         postRepository.save(post);
         return PostCreateResponseDto.from(post);
