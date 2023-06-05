@@ -11,9 +11,11 @@ import com.example.sns.repository.PostLikeRepository;
 import com.example.sns.repository.PostRepository;
 import com.example.sns.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,7 @@ import static com.example.sns.entity.Alarm.AlarmType.NEW_LIKE_ON_POST;
 import static com.example.sns.entity.Role.ADMIN;
 import static com.example.sns.exception.ErrorCode.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -98,10 +101,15 @@ public class PostService {
 
         PostLike postLike = postLikeRepository.findByPostAndUser(post, user).orElse(PostLike.from(post, user));
         boolean isLike = postLike.likes();
-        postLikeRepository.save(postLike);
+        try {
+            postLikeRepository.save(postLike);
 
-        if (isLike) {
-            publisher.publishEvent(AlarmEvent.from(NEW_LIKE_ON_POST, post.getUser(), user));
+            if (isLike) {
+                publisher.publishEvent(AlarmEvent.from(NEW_LIKE_ON_POST, post.getUser(), user));
+            }
+        } catch (ObjectOptimisticLockingFailureException e) {
+            log.info("게시글 좋아요 동시성 이슈 발생");
+            throw e;
         }
 
         return isLike;
